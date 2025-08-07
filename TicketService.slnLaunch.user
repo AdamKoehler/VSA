@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "TicketService.API\\TicketService.API.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "ExternalTicketSearch.API\\ExternalTicketSearch.API.csproj",
+        "Action": "StartWithoutDebugging"
+      }
+    ]
+  }
+]

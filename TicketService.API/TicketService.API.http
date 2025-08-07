@@ -1,0 +1,4 @@
+@HostAddressRoot = https://localhost:7293
+
+GET {{HostAddressRoot}}/api/tickets?searchFor=Outlook
+Accept: application/json

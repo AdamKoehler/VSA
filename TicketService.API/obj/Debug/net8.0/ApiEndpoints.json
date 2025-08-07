@@ -1,0 +1,24 @@
+[
+  {
+    "ContainingType": "TicketService.API.Features.Tickets.TicketSearch.TicketSearch\u002B\u003C\u003Ec",
+    "Method": "\u003CAddEndpoint\u003Eb__0_0",
+    "RelativePath": "api/tickets",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchFor",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
