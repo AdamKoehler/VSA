@@ -3,6 +3,7 @@ using TicketService.API;
 using TicketService.API.Features.Tickets.TicketSearch;
 using TicketService.API.Middleware;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using TicketService.API.Shared.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +18,13 @@ builder.Services.RegisterApplicationServices();
 builder.Services.RegisterPersistenceServices();
 
 // Windows authentication https://learn.microsoft.com/en-us/aspnet/core/security/authentication/windowsauth?view=aspnetcore-9.0&tabs=visual-studio
-//builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.FallbackPolicy = options.DefaultPolicy;
-//});
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = options.DefaultPolicy;
+});
+builder.Services.AddAuthorizationBuilder().AddPolicy(AuthPolicies.Volunteer, policy => policy.RequireRole(AuthRoles.Volunteer));
 
 var app = builder.Build();
 

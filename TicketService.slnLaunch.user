@@ -4,7 +4,8 @@
     "Projects": [
       {
         "Path": "TicketService.API\\TicketService.API.csproj",
-        "Action": "StartWithoutDebugging"
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "IIS Express"
       },
       {
         "Path": "ExternalTicketSearch.API\\ExternalTicketSearch.API.csproj",

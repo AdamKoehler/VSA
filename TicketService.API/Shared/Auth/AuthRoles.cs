@@ -2,6 +2,6 @@
 {
     public sealed record AuthRoles
     {
-        public const string Volunteer = """QT\DG - Volunteer""";
+        public const string Volunteer = """RA - CitrixApp - BeyondTrust - NA""";
     }
 }

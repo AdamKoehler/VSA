@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+using TicketService.API.Shared.Auth;
 using TicketService.API.Shared.Networking;
 
 namespace TicketService.API.Features.Tickets.TicketSearch;
@@ -8,11 +8,12 @@ public sealed class TicketSearch
     public void AddEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("api/tickets", async (string? searchFor,
-        ILoggerFactory logger,
+        ILoggerFactory loggerFactory,
         ITicketSearchApiClient ticketSearchApiClient,
         CancellationToken cancellationToken) =>
         {
-            logger.CreateLogger("EndpointHandler").LogInformation("Ticket Search API Called");
+            var logger = loggerFactory.CreateLogger(typeof(TicketSearch));
+            logger.LogInformation("Ticket Search API Called");
 
             var resultFromExternalApi = await ticketSearchApiClient.GetTicketsAsync(searchFor, cancellationToken);
             var result = resultFromExternalApi.Select(ticket => 
@@ -27,6 +28,7 @@ public sealed class TicketSearch
             });
 
             return Results.Ok(result);
-        });
+        })
+        .RequireAuthorization(AuthPolicies.Volunteer);
     }
 }
