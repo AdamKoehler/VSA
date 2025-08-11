@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "TicketService.API.Features.Tickets.TicketSearch.TicketSearch\u002B\u003C\u003Ec",
-    "Method": "\u003CAddEndpoint\u003Eb__0_0",
-    "RelativePath": "api/tickets",
+    "ContainingType": "TicketService.API.Features.Tickets.SearchTickets.TicketSearch\u002B\u003C\u003Ec__DisplayClass0_0",
+    "Method": "\u003CAddEndpoint\u003Eb__0",
+    "RelativePath": "tickets",
     "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,

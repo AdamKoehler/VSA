@@ -1,6 +1,0 @@
-@HostAddressRoot = https://localhost:7120
-
-GET {{HostAddressRoot}}/tickets?searchFor=
-Accept: application/json
-
-###

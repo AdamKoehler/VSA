@@ -2,7 +2,7 @@
 {
     public class Ticket(string title)
     {
-        public required string Title { get; set; } = title;
+        public string Title { get; set; } = title;
         public string? Description { get; set; }
         public string CreatedByUserId { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;

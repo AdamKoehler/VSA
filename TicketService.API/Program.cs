@@ -1,9 +1,11 @@
 using Serilog;
 using TicketService.API;
-using TicketService.API.Features.Tickets.TicketSearch;
 using TicketService.API.Middleware;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using TicketService.API.Shared.Auth;
+using TicketService.API.Shared.Domain;
+using TicketService.API.Shared.Domain.Models;
+using TicketService.API.Features.Tickets.SearchTickets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,14 +19,13 @@ builder.Services.AddOpenApiDocument();
 builder.Services.RegisterApplicationServices();
 builder.Services.RegisterPersistenceServices();
 
-// Windows authentication https://learn.microsoft.com/en-us/aspnet/core/security/authentication/windowsauth?view=aspnetcore-9.0&tabs=visual-studio
+// add authentication and authorization to container
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
-
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = options.DefaultPolicy;
 });
-builder.Services.AddAuthorizationBuilder().AddPolicy(AuthPolicies.Volunteer, policy => policy.RequireRole(AuthRoles.Volunteer));
+builder.Services.AddAuthorizationBuilder().AddPolicy(AuthPolicies.BeyondTrust, policy => policy.RequireRole(AuthRoles.BeyondTrust));
 
 var app = builder.Build();
 

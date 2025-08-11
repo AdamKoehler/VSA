@@ -1,5 +1,5 @@
 ﻿using TicketService.API.Shared.Networking;
-using TicketService.API.Features.Tickets.TicketSearch;
+using TicketService.API.Features.Tickets.SearchTickets;
 
 namespace TicketService.API;
 

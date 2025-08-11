@@ -11,11 +11,10 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("325b6601-d795-4884-9510-7241266e3579")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TicketService.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b7b9a07010bee8cdbde39314366eb75de31844a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TicketService.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TicketService.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

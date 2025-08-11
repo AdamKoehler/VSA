@@ -6,9 +6,9 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/tickets": {
+    "/tickets": {
       "get": {
-        "operationId": "GetApiTickets",
+        "operationId": "GetTickets",
         "parameters": [
           {
             "name": "searchFor",

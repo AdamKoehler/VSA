@@ -2,6 +2,6 @@
 {
     public sealed record AuthPolicies
     {
-        public const string Volunteer = "Volunteer";
+        public const string BeyondTrust = "BeyondTrust";
     }
 }
