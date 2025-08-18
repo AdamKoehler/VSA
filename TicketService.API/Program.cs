@@ -1,11 +1,15 @@
+using Asp.Versioning;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.EntityFrameworkCore;
+using Polly;
 using Serilog;
 using TicketService.API;
+using TicketService.API.Features.Tickets.SearchTickets;
 using TicketService.API.Middleware;
-using Microsoft.AspNetCore.Authentication.Negotiate;
+using TicketService.API.Persistance;
 using TicketService.API.Shared.Auth;
 using TicketService.API.Shared.Domain;
 using TicketService.API.Shared.Domain.Models;
-using TicketService.API.Features.Tickets.SearchTickets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +22,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument();
 builder.Services.RegisterApplicationServices();
 builder.Services.RegisterPersistenceServices();
+// DB Context
+// View localDB info via powershell command: sqllocaldb i MSSQLLocalDB
+// "DefaultConnection" is configured in appsettings.json
+builder.Services.AddDbContext<TicketDB>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // add authentication and authorization to container
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
@@ -44,6 +53,21 @@ app.UseStatusCodePages();
 // serilog hook into http request pipeline
 app.UseMiddleware<RequestLogContextMiddleware>();
 app.UseSerilogRequestLogging();
+
+// Query Param Versioning is what I will be implementing. This showcases a few other ways of passing parameters
+/*
+URL versioning: https://localhost:5001/api/v1/example
+Header versioning: https://localhost:5001/api/example -H 'X-Api-Version: 1'
+Query parameter versioning: https://localhost:5001/api/example?api-version=1 <- What were going for.
+*/
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new QueryStringApiVersionReader("api-version"); // this reads the value assigned in request
+});
+
 
 // Add endpoint
 var ticketSearch = app.Services.GetRequiredService<TicketSearch>();
