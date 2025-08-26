@@ -20,6 +20,21 @@ builder.Host.UseSerilog((context, loggerConfig) =>
 builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument();
+
+// Query Param Versioning is what I will be implementing. This showcases a few other ways of passing parameters
+/*
+URL versioning: https://localhost:5001/api/v1/example
+Header versioning: https://localhost:5001/api/example -H 'X-Api-Version: 1'
+Query parameter versioning: https://localhost:5001/api/example?api-version=1 <- What were going for.
+*/
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+});
+
 builder.Services.RegisterApplicationServices();
 builder.Services.RegisterPersistenceServices();
 // DB Context
@@ -53,21 +68,6 @@ app.UseStatusCodePages();
 // serilog hook into http request pipeline
 app.UseMiddleware<RequestLogContextMiddleware>();
 app.UseSerilogRequestLogging();
-
-// Query Param Versioning is what I will be implementing. This showcases a few other ways of passing parameters
-/*
-URL versioning: https://localhost:5001/api/v1/example
-Header versioning: https://localhost:5001/api/example -H 'X-Api-Version: 1'
-Query parameter versioning: https://localhost:5001/api/example?api-version=1 <- What were going for.
-*/
-builder.Services.AddApiVersioning(options =>
-{
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
-    options.ApiVersionReader = new QueryStringApiVersionReader("api-version"); // this reads the value assigned in request
-});
-
 
 // Add endpoint
 var ticketSearch = app.Services.GetRequiredService<TicketSearch>();

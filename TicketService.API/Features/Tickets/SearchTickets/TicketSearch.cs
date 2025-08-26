@@ -78,6 +78,12 @@ public sealed class TicketSearch
             Category = "Hardware"
         }];
 
+        // Create version set for tickets
+        var ticketsVersionSet = app.NewApiVersionSet()
+            .HasApiVersion(new ApiVersion(1, 0))
+            .HasApiVersion(new ApiVersion(2, 0))
+            .Build();
+
         // Version 1.0 - Basic search functionality
         app.MapGet("/tickets", async (string? searchFor,
         ILoggerFactory loggerFactory,
@@ -95,7 +101,7 @@ public sealed class TicketSearch
 
             return Results.Ok(filteredTickets);
         })
-        .WithApiVersionSet("tickets")
+        .WithApiVersionSet(ticketsVersionSet)
         .MapToApiVersion(1, 0)
         .RequireAuthorization(AuthPolicies.BeyondTrust);
 
@@ -145,7 +151,7 @@ public sealed class TicketSearch
 
             return Results.Ok(filteredTickets.ToList());
         })
-        .WithApiVersionSet("tickets")
+        .WithApiVersionSet(ticketsVersionSet)
         .MapToApiVersion(2, 0)
         .RequireAuthorization(AuthPolicies.BeyondTrust);
         
