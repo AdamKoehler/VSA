@@ -20,5 +20,42 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "TicketService.API.Features.Tickets.SearchTickets.TicketSearch\u002B\u003C\u003Ec__DisplayClass0_0",
+    "Method": "\u003CAddEndpoint\u003Eb__1",
+    "RelativePath": "tickets",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchFor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "priority",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

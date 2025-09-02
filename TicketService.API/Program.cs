@@ -1,15 +1,12 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
-using Polly;
 using Serilog;
 using TicketService.API;
 using TicketService.API.Features.Tickets.SearchTickets;
 using TicketService.API.Middleware;
 using TicketService.API.Persistance;
 using TicketService.API.Shared.Auth;
-using TicketService.API.Shared.Domain;
-using TicketService.API.Shared.Domain.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

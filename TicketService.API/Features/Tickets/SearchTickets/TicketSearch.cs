@@ -78,7 +78,6 @@ public sealed class TicketSearch
             Category = "Hardware"
         }];
 
-        // Create version set for tickets
         var ticketsVersionSet = app.NewApiVersionSet()
             .HasApiVersion(new ApiVersion(1, 0))
             .HasApiVersion(new ApiVersion(2, 0))
