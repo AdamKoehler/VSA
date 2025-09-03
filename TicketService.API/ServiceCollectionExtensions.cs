@@ -12,12 +12,15 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<ITicketSearchApiClient, TicketSearchApiClient>();
         services.AddSingleton<TicketSearch>();
-        var CurrentAssembly = Assembly.GetExecutingAssembly();
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssemblies(CurrentAssembly).
-            RegisterServicesFromAssemblies(CurrentAssembly).AddOpenRequestPreProcessor(typeof(LoggingBehavior<>));
-        });
+        
+        var currentAssembly = Assembly.GetExecutingAssembly();
+        
+        // Add MediatR with assembly scanning
+        services.AddMediatR(currentAssembly);
+        
+        // Add the logging behavior as a pipeline behavior
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        
         return services;
     }
 

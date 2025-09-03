@@ -536,3 +536,6 @@ C:\qtDev\ApiStories\VSA\TicketService.API\obj\Debug\net8.0\refint\TicketService.
 C:\qtDev\ApiStories\VSA\TicketService.API\obj\Debug\net8.0\TicketService.API.pdb
 C:\qtDev\ApiStories\VSA\TicketService.API\obj\Debug\net8.0\TicketService.API.genruntimeconfig.cache
 C:\qtDev\ApiStories\VSA\TicketService.API\obj\Debug\net8.0\ref\TicketService.API.dll
+C:\Users\adaml\source\GH Repos\TicketService.API\bin\Debug\net8.0\MediatR.dll
+C:\Users\adaml\source\GH Repos\TicketService.API\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\adaml\source\GH Repos\TicketService.API\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

@@ -1,14 +1,31 @@
-﻿namespace TicketService.API.Shared.Behaviors
+﻿using Microsoft.Extensions.Logging;
+using MediatR;
+
+namespace TicketService.API.Shared.Behaviors
 {
-    public class LoggingBehavior<TRequest>(ILogger<TRequest> logger) : IRequestPreProccessor<TRequest>
-        where TRequest : notnull
+    public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
-        private readonly ILogger<TRequest> _logger = logger;
-        public Task Process(TRequest request, CancellationToken cancellationToken)
+        private readonly ILogger<LoggingBehavior<TRequest, TResponse>> _logger;
+        
+        public LoggingBehavior(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+        {
+            _logger = logger;
+        }
+        
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         { 
-            _logger.LogInformation("Starting {featureFromRequestName}",
-                typeof(TRequest).Name);
-            return Task.CompletedTask;
+            _logger.LogInformation("Starting request: {RequestType} at {Timestamp}", 
+                typeof(TRequest).Name, 
+                DateTime.UtcNow);
+            
+            var response = await next();
+            
+            _logger.LogInformation("Completed request: {RequestType} at {Timestamp}", 
+                typeof(TRequest).Name, 
+                DateTime.UtcNow);
+                
+            return response;
         }
     }
 }
