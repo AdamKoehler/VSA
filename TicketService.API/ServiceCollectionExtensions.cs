@@ -15,9 +15,10 @@ public static class ServiceCollectionExtensions
         var CurrentAssembly = Assembly.GetExecutingAssembly();
         services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssemblies(CurrentAssembly).
-            RegisterServicesFromAssemblies(CurrentAssembly).AddOpenRequestPreProcessor(typeof(LoggingBehavior<>));
+            cfg.RegisterServicesFromAssemblies(CurrentAssembly);
         });
+        
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         return services;
     }
 
